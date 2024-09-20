@@ -14,7 +14,7 @@ app = Dash(__name__)
 
 df = pd.read_excel('dados_posts_remama.xlsx')
 
-fig = px.bar(df, x="Tipo de post", y="Curtidas", color="Tipo de post", barmode="group")
+fig = px.line(df, x="Coluna1", y="Curtidas", color="Tipo de post")
 
 opcoes = list(df['Tipo de post'].unique())
 
@@ -37,11 +37,11 @@ app.layout = html.Div(children=[
 )
 
 def update_output(value):
-    if value == 'Todas os tipos':
-        fig = px.bar(df, x='Produto', y='Quantidade', color='ID Loja', barmode='group')
+    if value == 'Todos os tipos':
+        fig = px.line(df, x='Coluna1', y='Curtidas', color='Tipo de post')
     else:
         tabela_filtrada = df.loc[df['Tipo de post'] == value, :]
-        fig = px.bar(tabela_filtrada, x='Tipo de post', y='Curtidas', color='Tipo de post', barmode='group')
+        fig = px.line(tabela_filtrada, x='Coluna1', y='Curtidas', color='Tipo de post')
     
     return fig
 
